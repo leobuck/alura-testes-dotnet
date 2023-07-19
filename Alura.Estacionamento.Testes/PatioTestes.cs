@@ -1,5 +1,8 @@
 ﻿using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
+using System.Numerics;
+using System.Reflection;
+using System.Runtime.ConstrainedExecution;
 using Xunit;
 
 namespace Alura.Estacionamento.Testes
@@ -71,6 +74,31 @@ namespace Alura.Estacionamento.Testes
 
 			// Assert
 			Assert.Equal(placa, consultado.Placa);
+		}
+
+        [Fact]
+        public void AlteraDadosVeiculo()
+        {
+			// Arrange
+			var estacionamento = new Patio();
+			var veiculo = new Veiculo();
+			veiculo.Proprietario = "José Silva";
+			veiculo.Placa = "ZXC-8524";
+			veiculo.Cor = "Verde";
+			veiculo.Modelo = "Opala";
+			estacionamento.RegistrarEntradaVeiculo(veiculo);
+
+			var veiculoAlterado = new Veiculo();
+			veiculoAlterado.Proprietario = "José Silva";
+			veiculoAlterado.Placa = "ZXC-8524";
+			veiculoAlterado.Cor = "Preto";
+			veiculoAlterado.Modelo = "Opala";
+
+            // Act
+            var alterado = estacionamento.AlteraDadosVeiculo(veiculoAlterado);
+
+            // Assert
+            Assert.Equal(alterado.Cor, veiculoAlterado.Cor);
 		}
 	}
 }
