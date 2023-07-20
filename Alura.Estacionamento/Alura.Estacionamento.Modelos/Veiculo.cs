@@ -11,6 +11,7 @@ namespace Alura.Estacionamento.Modelos
         private string _placa;
         private string _proprietario;
         private TipoVeiculo _tipo;
+        private string _ticket;
      
         //Propriedades   
 
@@ -90,6 +91,8 @@ namespace Alura.Estacionamento.Modelos
                 _tipo = value ?? TipoVeiculo.Automovel;
             }
         }
+        public string IdTicket { get; set; }
+        public string Ticket { get => _ticket; set => _ticket = value; }
 
         //Métodos
         public void Acelerar(int tempoSeg)
