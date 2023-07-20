@@ -83,7 +83,7 @@ namespace Alura.Estacionamento.Modelos
             return informacao;
         }
 
-		public Veiculo PesquisaVeiculo(string placa)
+		public Veiculo PesquisarVeiculo(string placa)
 		{
 			var encontrado = (from veiculo in this.Veiculos
                               where veiculo.Placa == placa
@@ -91,7 +91,7 @@ namespace Alura.Estacionamento.Modelos
             return encontrado;
 		}
 
-		public Veiculo AlteraDadosVeiculo(Veiculo veiculoAlterado)
+		public Veiculo AlterarDadosVeiculo(Veiculo veiculoAlterado)
 		{
             var veiculoTemp = (from veiculo in this.Veiculos
                                where veiculo.Placa == veiculoAlterado.Placa
