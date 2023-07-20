@@ -1,11 +1,24 @@
 using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
+using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.Estacionamento.Testes
 {
-	public class VeiculoTestes
+	public class VeiculoTestes : IDisposable
     {
+        private Veiculo veiculo;
+        public ITestOutputHelper SaidaConsoleTeste;
+
+        // Setup
+        public VeiculoTestes(ITestOutputHelper saidaConsoleTeste)
+        {
+            SaidaConsoleTeste = saidaConsoleTeste;
+            SaidaConsoleTeste.WriteLine("Construtor invocado.");
+            veiculo = new Veiculo();
+        }
+
         // Arrange: Preparacao do cenario
         // Act: Metodo que sera testado
         // Assert: Verificacao do resultado obtido
@@ -15,9 +28,11 @@ namespace Alura.Estacionamento.Testes
         public void TestaVeiculoAcelerarComParametro10()
         {
             // Arrange
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
+
             // Act
             veiculo.Acelerar(10);
+
             // Assert
             Assert.Equal(100, veiculo.VelocidadeAtual);
         }
@@ -47,18 +62,23 @@ namespace Alura.Estacionamento.Testes
 		public void FichaDeInformacaoDoVeiculo()
         {
 			// Arrange
-			var carro = new Veiculo();
-			carro.Proprietario = "Carlos Silva";
-            carro.Tipo = TipoVeiculo.Automovel;
-			carro.Placa = "ZAP-7419";
-			carro.Cor = "Verde";
-			carro.Modelo = "Variante";
+			//var veiculo = new Veiculo();
+			veiculo.Proprietario = "Carlos Silva";
+            veiculo.Tipo = TipoVeiculo.Automovel;
+			veiculo.Placa = "ZAP-7419";
+			veiculo.Cor = "Verde";
+			veiculo.Modelo = "Variante";
 
             // Act
-            string dados = carro.ToString();
+            string dados = veiculo.ToString();
 
             // Assert
             Assert.Contains("Ficha do Veículo:", dados);
+		}
+
+		public void Dispose()
+		{
+			SaidaConsoleTeste.WriteLine("Dispose invocado.");
 		}
 	}
 }

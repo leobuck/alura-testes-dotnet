@@ -1,17 +1,30 @@
 ﻿using Alura.Estacionamento.Alura.Estacionamento.Modelos;
 using Alura.Estacionamento.Modelos;
+using System;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Alura.Estacionamento.Testes
 {
-	public class PatioTestes
+	public class PatioTestes : IDisposable
     {
+		private Veiculo veiculo;
+		public ITestOutputHelper SaidaConsoleTeste;
+
+        // Setup
+        public PatioTestes(ITestOutputHelper saidaConsoleTeste)
+        {
+			SaidaConsoleTeste = saidaConsoleTeste;
+			SaidaConsoleTeste.WriteLine("Construtor invocado.");
+			veiculo = new Veiculo();
+        }
+
         [Fact]
         public void ValidaFaturamentoDoEstacionamentoComUmVeiculo()
         {
             // Arrange
             var estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = "Leo";
             veiculo.Tipo = TipoVeiculo.Automovel;
             veiculo.Cor = "Verde";
@@ -37,7 +50,7 @@ namespace Alura.Estacionamento.Testes
         {
             // Arrange
             var estacionamento = new Patio();
-            var veiculo = new Veiculo();
+            //var veiculo = new Veiculo();
             veiculo.Proprietario = proprietario;
             veiculo.Placa = placa;
             veiculo.Cor = cor;
@@ -59,7 +72,7 @@ namespace Alura.Estacionamento.Testes
 		{
 			// Arrange
 			var estacionamento = new Patio();
-			var veiculo = new Veiculo();
+			//var veiculo = new Veiculo();
 			veiculo.Proprietario = proprietario;
 			veiculo.Placa = placa;
 			veiculo.Cor = cor;
@@ -78,7 +91,7 @@ namespace Alura.Estacionamento.Testes
         {
 			// Arrange
 			var estacionamento = new Patio();
-			var veiculo = new Veiculo();
+			//var veiculo = new Veiculo();
 			veiculo.Proprietario = "José Silva";
 			veiculo.Placa = "ZXC-8524";
 			veiculo.Cor = "Verde";
@@ -96,6 +109,11 @@ namespace Alura.Estacionamento.Testes
 
             // Assert
             Assert.Equal(alterado.Cor, veiculoAlterado.Cor);
+		}
+
+		public void Dispose()
+		{
+			SaidaConsoleTeste.WriteLine("Dispose invocado.");
 		}
 	}
 }
